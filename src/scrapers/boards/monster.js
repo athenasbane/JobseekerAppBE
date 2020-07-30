@@ -5,6 +5,9 @@ const Search = require('../../models/Search');
 const monsterScraper = async (searchTitle, searchLocation, searchRadius, searchTimeScale, id) => {
 
     switch(searchRadius) {
+        case '1 Mile':
+            searchRadius = '2';
+            break;
         case '5 Miles':
             searchRadius = '5';
             break;
@@ -14,8 +17,8 @@ const monsterScraper = async (searchTitle, searchLocation, searchRadius, searchT
         case '15 Miles':
             searchRadius = '15';
             break;
-        case '25 Miles':
-            searchRadius = '25';
+        case '20 Miles':
+            searchRadius = '20';
             break;
         default:
             searchRadius = '30';

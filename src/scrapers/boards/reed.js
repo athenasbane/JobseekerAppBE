@@ -6,20 +6,23 @@ const Search = require('../../models/Search');
 const reedScraper = async (searchTitle, searchLocation, searchRadius, searchTimeScale, id) => {
 
     switch(searchRadius) {
+        case '1 Mile':
+            searchRadius = '1';
+            break;
         case '5 Miles':
-            searchRadius = 5;
+            searchRadius = '5';
             break;
         case '10 Miles':
-            searchRadius = 10;
+            searchRadius = '10';
             break;
         case '15 Miles':
-            searchRadius = 15;
+            searchRadius = '15';
             break;
-        case '25 Miles':
-            searchRadius = 25;
+        case '20 Miles':
+            searchRadius = '20';
             break;
         default:
-            searchRadius = 30;
+            searchRadius = '30';
 
     }
 

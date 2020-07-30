@@ -5,6 +5,9 @@ const Search = require('../../models/Search');
 const indeedScraper = async (searchTitle, searchLocation, searchRadius, searchTimeScale, id) => {
 
     switch(searchRadius) {
+        case '1 Mile':
+            searchRadius = '0';
+            break;
         case '5 Miles':
             searchRadius = '5';
             break;
@@ -14,8 +17,8 @@ const indeedScraper = async (searchTitle, searchLocation, searchRadius, searchTi
         case '15 Miles':
             searchRadius = '15';
             break;
-        case '25 Miles':
-            searchRadius = '25';
+        case '20 Miles':
+            searchRadius = '20';
             break;
         default:
             searchRadius = '30';
@@ -29,10 +32,10 @@ const indeedScraper = async (searchTitle, searchLocation, searchRadius, searchTi
         case '3 Days':
             searchTimeScale = '3';
             break;
-        case '7 Days':
+        case '1 Week':
             searchTimeScale = '7';
             break;
-        case '14 Days':
+        case '2 Weeks':
             searchTimeScale = '14';
             break;
         default:
