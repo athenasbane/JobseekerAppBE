@@ -6,34 +6,34 @@ const indeedScraper = async (searchTitle, searchLocation, searchRadius, searchTi
 
     switch(searchRadius) {
         case '5 Miles':
-            searchRadius = 5;
+            searchRadius = '5';
             break;
         case '10 Miles':
-            searchRadius = 10;
+            searchRadius = '10';
             break;
         case '15 Miles':
-            searchRadius = 15;
+            searchRadius = '15';
             break;
         case '25 Miles':
-            searchRadius = 25;
+            searchRadius = '25';
             break;
         default:
-            searchRadius = 30;
+            searchRadius = '30';
 
     }
 
     switch(searchTimeScale) {
         case '1 Day':
-            searchTimeScale = 1;
+            searchTimeScale = '1';
             break;
         case '3 Days':
-            searchTimeScale = 3;
+            searchTimeScale = '3';
             break;
         case '7 Days':
-            searchTimeScale = 7;
+            searchTimeScale = '7';
             break;
         case '14 Days':
-            searchTimeScale = 14;
+            searchTimeScale = '14';
             break;
         default:
             searchTimeScale = 'last';
