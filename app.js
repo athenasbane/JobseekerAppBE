@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
 });
 
 // database 
-const db = process.env.MONGOURI;
+const db = process.env.MONGO_URI;
 
 // models 
 const Search = require('./src/models/Search');

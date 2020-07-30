@@ -78,13 +78,16 @@ const indeedScraper = async (searchTitle, searchLocation, searchRadius, searchTi
     jobs.forEach(job => {
 
         const capitalizedTitle = searchTitle.charAt(0).toUpperCase() + searchTitle.slice(1);
-    
-        if(job.title.includes(capitalizedTitle)) {
+        const upperCaseTitle = searchTitle.toUpperCase();
+        const lowerCaseTitle = searchTitle.toLowerCase();
+
+        if(job.title.includes(capitalizedTitle) || job.title.includes(lowerCaseTitle) || 
+        job.title.includes(upperCaseTitle)) {
             checkedJobs.push(job);
         } else {
             console.log(`[Rejected Job] ${job.title} - ${job.source}`);
-            }
-        });
+                }
+    });
 
     const currentSearch = await Search.findOne({ id }).exec();      
     
