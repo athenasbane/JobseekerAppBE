@@ -18,7 +18,7 @@ const indeedScraper = async (searchTitle, searchLocation, searchRadius, searchTi
             searchRadius = '15';
             break;
         case '20 Miles':
-            searchRadius = '20';
+            searchRadius = '25';
             break;
         default:
             searchRadius = '30';
