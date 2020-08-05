@@ -36,7 +36,8 @@ const UserSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: false
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,

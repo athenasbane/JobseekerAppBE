@@ -215,9 +215,24 @@ app.post('/users/jobs/save', auth, async (req, res) => {
         await job.save();
         res.status(201).send();
     } catch (e) {
-        res.status(400);
+        res.status(400).send();
     }
 
+});
+
+app.post('/users/jobs/add', auth, async (req, res) => {
+
+    const job = new Job({
+        ...req.body.job,
+        owner: req.user._id
+    });
+
+    try {
+        await job.save();
+        res.status(201).send();
+    } catch (e) {
+        res.status(400).send();
+    }
 });
 
 // Express listener 
