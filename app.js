@@ -227,6 +227,8 @@ app.post('/users/jobs/add', auth, async (req, res) => {
         owner: req.user._id
     });
 
+    console.log(job)
+
     try {
         await job.save();
         res.status(201).send();

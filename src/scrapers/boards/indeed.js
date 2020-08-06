@@ -43,6 +43,14 @@ const indeedScraper = async (searchTitle, searchLocation, searchRadius, searchTi
 
     }
 
+    if(searchTitle.includes(' ')) {
+       searchTitle = searchTitle.replace(' ', '+')
+    }
+
+    if(searchLocation.includes(' ')) {
+       searchLocation = searchLocation.replace(' ', '+')
+    }
+
     let indeed = await axios.get(`https://www.indeed.co.uk/jobs?as_and=${searchTitle}&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=${searchRadius}&l=${searchLocation}&fromage=${searchTimeScale}&limit=10&sort=&psf=advsrch&from=advancedsearch`);
     
     const jobs = [];
@@ -77,12 +85,9 @@ const indeedScraper = async (searchTitle, searchLocation, searchRadius, searchTi
     
     jobs.forEach(job => {
 
-        const capitalizedTitle = searchTitle.charAt(0).toUpperCase() + searchTitle.slice(1);
-        const upperCaseTitle = searchTitle.toUpperCase();
-        const lowerCaseTitle = searchTitle.toLowerCase();
+        const lowerCaseTitle = searchTitle.toLowerCase().split('+')
 
-        if(job.title.includes(capitalizedTitle) || job.title.includes(lowerCaseTitle) || 
-        job.title.includes(upperCaseTitle)) {
+        if(lowerCaseTitle.every(subString => job.title.toLowerCase().includes(subString))) {  
             checkedJobs.push(job);
         } else {
             console.log(`[Rejected Job] ${job.title} - ${job.source}`);

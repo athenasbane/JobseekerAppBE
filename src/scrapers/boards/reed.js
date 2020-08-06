@@ -44,6 +44,14 @@ const reedScraper = async (searchTitle, searchLocation, searchRadius, searchTime
 
     }
 
+    if(searchTitle.includes(' ')) {
+        searchTitle = searchTitle.replace(' ', '-')
+    }
+ 
+    if(searchLocation.includes(' ')) {
+        searchLocation = searchLocation.replace(' ', '-')
+    }
+
     const jobs = [];
 
     let reed = await axios.get(`https://www.reed.co.uk/jobs/${searchTitle}-jobs-in-${searchLocation}?datecreatedoffset=${searchTimeScale}&proximity=${searchRadius}`);
@@ -82,12 +90,9 @@ const reedScraper = async (searchTitle, searchLocation, searchRadius, searchTime
     
     jobs.forEach(job => {
 
-        const capitalizedTitle = searchTitle.charAt(0).toUpperCase() + searchTitle.slice(1);
-        const upperCaseTitle = searchTitle.toUpperCase();
-        const lowerCaseTitle = searchTitle.toLowerCase();
+        const lowerCaseTitle = searchTitle.toLowerCase().split('-')
 
-        if(job.title.includes(capitalizedTitle) || job.title.includes(lowerCaseTitle) || 
-        job.title.includes(upperCaseTitle)) {
+        if(lowerCaseTitle.every(subString => job.title.toLowerCase().includes(subString))) {  
             checkedJobs.push(job);
         } else {
             console.log(`[Rejected Job] ${job.title} - ${job.source}`);

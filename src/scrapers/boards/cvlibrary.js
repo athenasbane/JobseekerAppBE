@@ -43,6 +43,14 @@ const cvlibraryScraper = async (searchTitle, searchLocation, searchRadius, searc
 
     }
 
+    if(searchTitle.includes(' ')) {
+        searchTitle = searchTitle.replace(' ', '-')
+     }
+ 
+    if(searchLocation.includes(' ')) {
+        searchLocation = searchLocation.replace(' ', '-')
+     }
+
     const jobs = [];
 
     let cvlibrary = await axios.get(`https://www.cv-library.co.uk/${searchTitle}-jobs-in-${searchLocation}?distance=${searchRadius}&posted=${searchTimeScale}&us=1`);
@@ -83,12 +91,9 @@ const cvlibraryScraper = async (searchTitle, searchLocation, searchRadius, searc
     
     jobs.forEach(job => {
 
-        const capitalizedTitle = searchTitle.charAt(0).toUpperCase() + searchTitle.slice(1);
-        const upperCaseTitle = searchTitle.toUpperCase();
-        const lowerCaseTitle = searchTitle.toLowerCase();
+        const lowerCaseTitle = searchTitle.toLowerCase().split('-')
 
-        if(job.title.includes(capitalizedTitle) || job.title.includes(lowerCaseTitle) || 
-        job.title.includes(upperCaseTitle)) {
+        if(lowerCaseTitle.every(subString => job.title.toLowerCase().includes(subString))) {  
             checkedJobs.push(job);
         } else {
             console.log(`[Rejected Job] ${job.title} - ${job.source}`);
